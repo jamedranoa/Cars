@@ -16,7 +16,12 @@
     this.pos.y = this.pos.y
   };
 
-
+  MovingObject.prototype.isCollidedWith = function (movingObject) {
+    var collided = this.pos.x == movingObject.pos.x && this.pos.y + this.radius*2> movingObject.pos.y;
+    
+    return collided
+  };
+  
   MovingObject.prototype.draw = function (ctx) {
     if(this.img) {
     			ctx.save();
@@ -40,16 +45,6 @@
     }
   };
 
-  MovingObject.prototype.isCollidedWith = function (movingObject) {
-    var collided = this.pos.x == movingObject.pos.x && this.pos.y + this.radius*2> movingObject.pos.y
-    return collided
-  };
-
 
 })(this);
 
-Function.prototype.inherits = function (Super) {
-  function Surrogate(){};
-  Surrogate.prototype = Super.prototype
-  this.prototype = new Surrogate();
-};

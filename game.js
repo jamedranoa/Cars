@@ -2,8 +2,8 @@
   var Cars = root.Cars = (root.Cars || {});
 
   var Game = Cars.Game = function(ctx) {
-    this.asteroids = [];
-    this.speed = 3;
+    this.cars = [];
+    this.speed = 2;
     this.ship = new Cars.Ship();
     this.bullets = [];
     this.counter = 0;
@@ -19,20 +19,20 @@
   Game.prototype.generateCars = function () {
    
     var positions = []
-    if (this.asteroids.length === 0) {
+    if (this.cars.length === 0) {
       while (positions.length < 2) {
         positions.push(Game.POSIBLE_POS[Math.floor(Math.random() * 3)])
       }
       console.log(positions)
       var new_cars = Cars.Asteroid.generateManyCars(positions,this.speed);
 
-      this.asteroids = new_cars
+      this.cars = new_cars
      
     }
   };
 
   Game.prototype.movingObjects = function () {
-    return this.asteroids.concat(this.bullets).concat([this.ship])
+    return this.cars.concat(this.bullets).concat([this.ship])
   };
 
   Game.DIM_X = Cars.Ship.RADIUS * 3;
@@ -75,37 +75,47 @@
 
   Game.prototype.checkCollisions = function (myVar) {
     var game = this;
-    this.asteroids.forEach(function(astr, i){
+    this.cars.forEach(function(astr, i){
 
       if (astr.isCollidedWith(game.ship)) {
         game.stop(myVar);
-      } else if (astr.pos.y > Game.DIM_Y + 100) {
-        game.asteroids = [];
-      }
-      
-      if (game.asteroids.length === 0) {
-        game.generateCars();
-        if (game.speed < 2) {
-          game.speed += game.speed*0.1;
-        }
-        game.counter += 1;
       }
       
     });
+  };
+  
+  Game.prototype.levelUp = function () {
+    if (this.speed < 3) {
+      this.speed += this.speed * 0.1
+    }else if (this.speed  < 4) {
+      this.speed += this.speed * 0.05    
+    }
+    
   };
 
   Game.prototype.removeObjects = function () {
-    game.bullets.forEach(function(bullet, i) {
-      if (bullet.offScreen()) {
-        game.bullets.splice(i,1);
-      }
+    this.cars.forEach(function(astr, i){
+      if (astr.pos.y > Game.DIM_Y + 100) {
+              game.cars = [];
+            }
     });
   };
+  
+  
+  Game.prototype.repoblateCars = function () {
+    if (game.cars.length === 0) {
+      game.levelUp();
+      game.generateCars();
+      if (game.speed < 2) {
+        game.speed += game.speed*0.1;
+      }
+      game.counter += 1;
+    }
+  }
 
   Game.prototype.stop = function (myVar) {
     clearInterval(myVar);
-    alert("You Lose!! Try Again");
-    location.reload()
+    $(".again").removeClass("hidden");
   };
   
   Game.prototype.bindKeys = function () {
@@ -141,8 +151,9 @@
       game.ctx.font= "40pt Arial";
       game.ctx.fillStyle = "green"
       game.ctx.fillText(game.counter,10,50);
-
       game.checkCollisions(inter);
+      game.repoblateCars();
+      
     };
 
   };

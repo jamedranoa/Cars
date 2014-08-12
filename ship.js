@@ -16,22 +16,6 @@
 
   Ship.inherits(Cars.MovingObject);
 
-  // Ship.prototype.draw = function (ctx) {
-//     ctx.fillStyle = this.color;
-//     ctx.beginPath();
-//
-//     ctx.arc(
-//       this.pos.x,
-//       this.pos.y,
-//       this.radius,
-//       this.angle + Math.PI/2,
-//       this.angle - Math.PI/2,
-//       true
-//     );
-//
-//     ctx.fill();
-//   };
-
   Ship.RADIUS = 50;
   Ship.COLOR = "red";
 }(this));

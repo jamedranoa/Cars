@@ -8,13 +8,32 @@
     font: inherit;
     vertical-align: baseline;
   }
+  
+  button {
+
+     -webkit-appearance: none;
+     display: inline;
+     box-sizing: content-box;
+     margin: 0;
+     padding: 0;
+     border: 0;
+     outline: 0;
+     width: auto;
+     font: inherit;
+     vertical-align: baseline;
+     background: transparent;
+     color: inherit;
+   }
+  
 
 
   body {
     font-family: sans-serif;
-    background: black;
+    background: white;
+    
     color: #333;
-    overflow-y:hidden;
+    overflow-y:auto;
+    overflow-x:hidden;
   }
 
   a {
@@ -44,21 +63,43 @@
     text-align:center;
     font-family: "Brush Script MT", cursive;
   }
+  
+  .content{
+    width:1600px;
+    height:650px;
+    background-image: url("taxis.jpg");
+    margin:auto;
+  }
 
   small{
     font-size:10px;
     font-family:sans-serif;
   }
+  
+  
 
   #for-canvas{
+    position:relative;
+    
     margin:auto;
-    margin-top: 20px;
-    width:1002px;
+    margin-top: 30px;
+    width:160px;
+    
+    
   }
+  
+  @media(max-width:900px){
+    #for-canvas{
+      float:left;
+      margin-left:100px;
+    }
+  }
+  
 
   canvas{
-    border:5px solid white;
-    background:black;
+    border:5px solid black;
+    margin-top:30px;
+    background-image: url('street.jpg');
     border-radius:10px;
   }
 
@@ -69,17 +110,39 @@
   }
 
   img{
-    width:200px;
+    width:100px;
   }
   .for-images{
     margin:auto;
-    width:460px;
+    margin-left:-40px;
+    margin-top:40px;
+    width:250px;
   }
 
   img:last-child{
     margin-left:40px;
   }
+  
+  .again{
+    position:absolute;
+    top:220px;
+    left:20px;
+    padding:20px;
+    background:white;
+    color:black;
+    border-radius:10px;
+  }
+  
+  .again:hover{
+    cursor:pointer;
+    background:rgb(234, 253, 239);
+  }
+  
+  .hidden{
+    display:none;
+  }
 
+  
 
 
 </style>
@@ -88,6 +151,7 @@
     <title>Cars</title>
 </head>
 <body>
+  <script src="jquery-1.11.1.js"></script>
     <script>
       Function.prototype.inherits = function (Super) {
         function Surrogate(){};
@@ -95,6 +159,21 @@
         this.prototype = new Surrogate();
       };
     </script>
+    
+    <script>
+      $(document).ready(function () {
+        $(".again").click(function () {
+          location.reload()
+        });
+        
+        $(document).keypress(function(e){
+            if (e.which == 13){
+                $(".again").click();
+            }
+        });
+      });
+    </script>
+    
     <script src="keymaster.js"></script>
     <script src="moving_object.js"></script>
     <script src="ship.js"></script>
@@ -106,12 +185,18 @@
     <div class = "header">
       <h1>Cars <small>by Jorge Medrano</small></h1>
     </div>
-    <div id="for-canvas"><canvas></canvas><div>
-    <h3>Use:</h3>
-    <div class="for-images">
-      <img src="spacebar.png">
-      <img src="arrow_keys.png">
+    <div class="content">
+      <div id="for-canvas"><canvas></canvas>
+          <button class="again hidden">Play Again</button>
+      <div>
+      <h3>Use:</h3>
+      <div class="for-images">
+        <img src="left.png">
+        <img src="right.png">
+      </div>
     </div>
+    
+    
 
 
     <script>
