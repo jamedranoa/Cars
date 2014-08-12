@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<style>
+  html, body, header, h1, h2, nav, ul, li, a, footer, small {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+
+  body {
+    font-family: sans-serif;
+    background: black;
+    color: #333;
+    overflow-y:hidden;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .group:after{
+    content:"";
+    clear:both;
+    display:block;
+  }
+
+  .header{
+    background:black;
+    padding:20px;
+  }
+
+  .header h1{
+    margin:auto;
+    font-size:40px;
+    color:white;
+    text-align:center;
+    font-family: "Brush Script MT", cursive;
+  }
+
+  small{
+    font-size:10px;
+    font-family:sans-serif;
+  }
+
+  #for-canvas{
+    margin:auto;
+    margin-top: 20px;
+    width:1002px;
+  }
+
+  canvas{
+    border:5px solid white;
+    background:black;
+    border-radius:10px;
+  }
+
+  h3{
+    color:white;
+    text-align:center;
+    font-size:30px;
+  }
+
+  img{
+    width:200px;
+  }
+  .for-images{
+    margin:auto;
+    width:460px;
+  }
+
+  img:last-child{
+    margin-left:40px;
+  }
+
+
+
+</style>
+
+<head>
+    <title>Cars</title>
+</head>
+<body>
+    <script>
+      Function.prototype.inherits = function (Super) {
+        function Surrogate(){};
+        Surrogate.prototype = Super.prototype
+        this.prototype = new Surrogate();
+      };
+    </script>
+    <script src="keymaster.js"></script>
+    <script src="moving_object.js"></script>
+    <script src="ship.js"></script>
+    <script src="game.js"></script>
+    <script src="vector.js"></script>
+    <script src="asteroid.js"></script>
+    <script src="ship.js"></script>
+    <script src="bullet.js"></script>
+    <div class = "header">
+      <h1>Cars <small>by Jorge Medrano</small></h1>
+    </div>
+    <div id="for-canvas"><canvas></canvas><div>
+    <h3>Use:</h3>
+    <div class="for-images">
+      <img src="spacebar.png">
+      <img src="arrow_keys.png">
+    </div>
+
+
+    <script>
+      var canvas = document.getElementsByTagName("canvas")[0];
+      canvas.setAttribute("height", Cars.Game.DIM_Y);
+      canvas.setAttribute("width", Cars.Game.DIM_X);
+      var ctx = canvas.getContext("2d");
+      var game = new Cars.Game(ctx)
+      game.start();
+    </script>
+</body>
+</html>
