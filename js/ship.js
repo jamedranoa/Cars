@@ -11,7 +11,7 @@
     
     this.img = new Image();
     
-    this.img.src = 'car2.png'
+    this.img.src = 'images/car2.png'
 
     Cars.MovingObject.call(this, pos, vel, Ship.RADIUS, Ship.COLOR);
 

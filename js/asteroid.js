@@ -8,7 +8,7 @@
     var vel = Cars.Vector.fromPolar(randomAngle,speed);
     var radius = 50;
     this.img = new Image();
-    this.img.src = 'car.png'
+    this.img.src = 'images/car.png'
 
     Cars.MovingObject.call(this, pos, vel, radius, Asteroid.COLOR)
   };
